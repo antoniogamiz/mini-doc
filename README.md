@@ -1,4 +1,7 @@
-# Official Documentation of Perl 6
+**Important:** This is not the real doc repository, this is only a copy of the oficial one with less content.
+The main purpose of this repo is use it to make tests with a tiny set of pod6 files.
+
+# Mini Documentation of Perl 6
 
 [![Build Status](https://travis-ci.org/perl6/doc.svg?branch=master)](https://travis-ci.org/perl6/doc) [![artistic](https://img.shields.io/badge/license-Artistic%202.0-blue.svg?style=flat)](https://opensource.org/licenses/Artistic-2.0) [![Run Status](https://api.shippable.com/projects/591e99923f2f790700098a30/badge?branch=master)](https://app.shippable.com/github/perl6/doc)
 
