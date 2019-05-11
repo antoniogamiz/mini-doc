@@ -5,7 +5,7 @@
 
 section: At the beginning
 
-Brief Introduction FILE: intro
+Operators FILE: operators
 Perl 6 Example P6-101 FILE: 101-basics
 Terms FILE: terms
 Type system FILE: typesystem
