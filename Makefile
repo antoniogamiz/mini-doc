@@ -1,6 +1,7 @@
 
 html: clean
 	git clone https://github.com/perl6/doc
+	echo "Replacing files"
 	rm -rf doc/doc
 	cp -a test-doc/ doc/ 
 	rm doc/type-graph.txt
