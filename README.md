@@ -2,7 +2,8 @@
 
 [![artistic](https://img.shields.io/badge/license-Artistic%202.0-blue.svg?style=flat)](https://opensource.org/licenses/Artistic-2.0)
 
-This is only a modified subset of the actual [documentation](https://github.com/perl6/doc). The main purpose of this repo is to be used to test changes in a fast way.
+This is only a modified subset of the actual [documentation](https://github.com/perl6/doc). 
+The main purpose of this repo is to be used to test changes in a fast way.
 
 You can download the tooling needed to build the documentation with the following command:
 
@@ -21,6 +22,9 @@ And clean the workspace with:
 ~~~
 make clean
 ~~~
+
+If you have changed some of the Pod6 files you need to update the `previous-links.txt` file
+with the new changes.
 
 # LICENSE
 
