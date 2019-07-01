@@ -39,17 +39,17 @@ The next list shows all characteristics that pod files in `test-doc` should have
 
 ### Definitions related
 
-- [ ] Headings like `=head2 The something operator`
-- [ ] Headings like `=head2 The C<something> operator`
-- [ ] Headings like `=head2 Infix foo`
-- [ ] Headings like `=head2 Infix C<foo>`
-- [ ] Headings like `=head2 trait Indix Foo`
-- [ ] Unambiguous headings => `=head2 X<something|something>`
-- [ ] All kinds of FormattingCodes check they are ignored(`=head2 L<aa|aa>`, `=head2 B<aa|aa>`, ...).
+- [x] Headings like `=head2 The something operator`
+- [x] Headings like `=head2 The C<something> operator`
+- [x] Headings like `=head2 Infix foo`
+- [x] Headings like `=head2 Infix C<foo>`
+- [x] Headings like `=head2 trait Indix Foo`
+- [x] Unambiguous headings => `=head2 X<something|something>`
+- [x] All kinds of FormattingCodes check they are ignored(`=head2 L<aa|aa>`, `=head2 B<aa|aa>`, ...).
 
 ### Nested definitions
 
-- [ ] scope detection:
+- [x] scope detection:
 
   ```
   =head2 valid definition #1
@@ -59,7 +59,7 @@ The next list shows all characteristics that pod files in `test-doc` should have
   =head2 valid definition #2
   ```
 
-- [ ] Nested definitions:
+- [x] Nested definitions:
 
   ```
   =head2 valid definition #1
@@ -82,8 +82,12 @@ The next list shows all characteristics that pod files in `test-doc` should have
 
 ### References
 
-- [ ] Whatever reference element in some pod => `X<some|reference>`
-- [ ] Multireferences => `X<some|reference1;reference2>`
+- [x] Whatever reference element in some pod => `X<some|reference>`
+- [x] Multireferences => `X<some|reference1;reference2>`
+
+### Site generation
+
+- [ ] All menus in the doc site should have at least one element.
 
 # LICENSE
 
