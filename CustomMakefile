@@ -18,7 +18,7 @@ DISAMBIGUATE := True
         gen-pod6-source clean-build \
 	docker-image docker-htmlify docker-test docker-xtest docker-ctest docker-testall docker-run
 
-html: gen-pod6-source bigpage htmlify
+html: gen-pod6-source htmlify
 
 htmlify: gen-pod6-source assets
 	perl6 htmlify.p6 --manage=$(USE_CATEGORIES) --disambiguation=$(DISAMBIGUATE)

@@ -93,7 +93,15 @@ The next list shows all characteristics that pod files in `test-doc` should have
 
 ### Site generation
 
-- [ ] All menus in the doc site should have at least one element.
+- [x] All menus in the doc site should have at least one element.
+  - [x] Language
+  - [x] Types
+    - [x] Basic
+    - [x] One composite type
+    - [x] Domain-specific type
+    - [x] Exceptions
+  - [x] Routines
+  - [x] Programs
 
 # LICENSE
 
