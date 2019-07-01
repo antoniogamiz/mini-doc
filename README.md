@@ -28,6 +28,12 @@ make build
 to rebuild the doc and see if some files have been lost (this is done automatically
 with [Perl6::LinkHelath](https://github.com/antoniogamiz/Perl6-LinkHealth)).
 
+If you have made changes to the `test-doc` dir and you do not want to resetup the enviroment, you can execute:
+
+```
+make update-test-doc
+```
+
 #### Notes
 
 If you have changed some of the Pod6 files you need to update the `previous-links.txt` file
@@ -94,3 +100,7 @@ The next list shows all characteristics that pod files in `test-doc` should have
 The code in this repository is available under the Artistic License 2.0
 as published by The Perl Foundation. See the [LICENSE](LICENSE) file for the full
 text.
+
+```
+
+```

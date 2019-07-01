@@ -9,6 +9,11 @@ setup: clean
 	cp CustomMakefile doc/Makefile
 	git clone https://github.com/antoniogamiz/Perl6-LinkHealth
 
+update-test-doc:
+	rm -rf doc/doc
+	cp -a test-doc/ doc/ 
+	mv doc/test-doc doc/doc
+
 build:
 	d=$$(date +%s) \
 	; cd doc && make html \
