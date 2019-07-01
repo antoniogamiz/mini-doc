@@ -2,292 +2,33 @@
 
 =TITLE class Any
 
-=SUBTITLE Thing/object
+=SUBTITLE Testing pod
 
     class Any is Mu {}
 
-While L<Mu|/type/Mu> is the root of the Perl 6 class hierarchy, L<Any|/type/Any>
-is the class that serves as a default base class for new classes, and as the
-base class for most built-in classes.
-
-Since Perl 6 intentionally confuses items and single-element lists, most methods
-in L<Any|/type/List> are also present on class L<List|/type/Any>, and coerce to
-List or a list-like type.
-
 =head1 Methods
+
+This heading should not be indexed!
 
 =head2 method ACCEPTS
 
-Defined as:
-
-    multi method ACCEPTS(Any:D: Mu $other)
-
-Usage:
-
-=begin code :lang<pseudo>
-EXPR.ACCEPTS(EXPR);
-=end code
-
-Returns C<True> if C<$other === self> (i.e. it checks object identity).
-
-Many built-in types override this for more specific comparisons.
+This should be indexed!
 
 =head2 method any
 
-Defined as:
+This should be indexed and subparsing should be done!
 
-    method any(--> Junction:D)
+=head3 method root
 
-Interprets the invocant as a list and creates an
-L<any|/routine/any>-L<Junction|/type/Junction> from it.
+Subparsing!
 
-    say so 2 == <1 2 3>.any;        # OUTPUT: «True␤»
-    say so 5 == <1 2 3>.any;        # OUTPUT: «False␤»
+=head2 routine mro
 
-=head2 method all
+At this point the last subparsing should have stopped.
 
-Defined as:
+Defined as
 
-    method all(--> Junction:D)
-
-Interprets the invocant as a list and creates an
-L<all|/routine/all>-L<Junction|/type/Junction> from it.
-
-    say so 1 < <2 3 4>.all;         # OUTPUT: «True␤»
-    say so 3 < <2 3 4>.all;         # OUTPUT: «False␤»
-
-=head2 method one
-
-Defined as:
-
-    method one(--> Junction:D)
-
-Interprets the invocant as a list and creates a
-L<one|/routine/one>-L<Junction|/type/Junction> from it.
-
-    say so 1 == (1, 2, 3).one;      # OUTPUT: «True␤»
-    say so 1 == (1, 2, 1).one;      # OUTPUT: «False␤»
-
-=head2 method none
-
-Defined as:
-
-    method none(--> Junction:D)
-
-Interprets the invocant as a list and creates a
-L<none|/routine/none>-L<Junction|/type/Junction> from it.
-
-    say so 1 == (1, 2, 3).none;     # OUTPUT: «False␤»
-    say so 4 == (1, 2, 3).none;     # OUTPUT: «True␤»
-
-=head2 method list
-
-Defined as:
-
-    multi method list(Any:U: --> List)
-    multi method list(Any:D \SELF: --> List)
-
-
-Applies the infix L«C<,>|/routine/,» operator to the invocant and returns
-the resulting L<List|/type/List>:
-
-    say 42.list.^name;           # OUTPUT: «List␤»
-    say 42.list.elems;           # OUTPUT: «1␤»
-
-Subclasses of C<Any> may choose to return any I<core> type that
-does the L<Positional|/type/Positional> role
-from L«C<.list>|/routine/list». Use L«C<.List>|/routine/List» to
-coerce specifically to L<List|/type/List>.
-
-X<|@ list contextualizer>
-C<@> can also be used as a list or C<Positional> contextualizer:
-
-=for code
-my $not-a-list-yet = $[1,2,3];
-say $not-a-list-yet.perl;             # OUTPUT: «$[1, 2, 3]␤»
-my @maybe-a-list = @$not-a-list-yet;
-say @maybe-a-list.^name;              # OUTPUT: «Array␤»
-
-In the first case, the list is I<itemized>. C<@> as a prefix puts the initial
-scalar in a list context by calling C<.list> and turning it into an C<Array>.
-
-=head2 method push
-
-Defined as:
-
-    method push(|values --> Positional:D)
-
-The method push is defined for undefined invocants and allows for
-autovivifying undefined to an empty L<Array|/type/Array>, unless the undefined value
-implements L<Positional|/type/Positional> already. The argument provided will then be pushed
-into the newly created Array.
-
-    my %h;
-    say %h<a>;     # OUTPUT: «(Any)␤»      <-- Undefined
-    %h<a>.push(1); # .push on Any
-    say %h;        # OUTPUT: «{a => [1]}␤» <-- Note the Array
-
-=head2 routine reverse
-
-Defined as:
-
-    multi sub    reverse(*@list  --> Seq:D)
-    multi method reverse(List:D: --> Seq:D)
-
-Returns a L<Seq|/type/Seq> with the same elements in reverse order.
-
-Note that C<reverse> always refers to reversing elements of a list;
-to reverse the characters in a string, use L<flip|/routine/flip>.
-
-Examples:
-
-    say <hello world!>.reverse;     # OUTPUT: «(world! hello)␤»
-    say reverse ^10;                # OUTPUT: «(9 8 7 6 5 4 3 2 1 0)␤»
-
-=head2 method sort
-
-Defined as:
-
-    multi method sort()
-    multi method sort(&custom-routine-to-use)
-
-Sorts iterables with L<cmp|/routine/cmp> or given code object and returns a new
-L<Seq|/type/Seq>. Optionally, takes a L<Callable|/type/Callable> as a positional
-parameter, specifying how to sort.
-
-Examples:
-
-    say <b c a>.sort;                           # OUTPUT: «(a b c)␤»
-    say 'bca'.comb.sort.join;                   # OUTPUT: «abc␤»
-    say 'bca'.comb.sort({$^b cmp $^a}).join;    # OUTPUT: «cba␤»
-    say '231'.comb.sort(&infix:«<=>»).join;     # OUTPUT: «123␤»
-
-=head2 method map
-
-Defined as:
-
-    multi method map(Hash:D \hash)
-    multi method map(Iterable:D \iterable)
-    multi method map(|c)
-    multi method map(\SELF: &block;; :$label, :$item)
-    multi sub map(&code, +values)
-
-C<map> will iterate over the invocant and apply the number of positional
-parameters of the code object from the invocant per call.  The returned values
-of the code object will become elements of the returned L<Seq|/type/Seq>.
-
-The C<:$label> and C<:$item> are useful only internally, since C<for> loops get
-converted to C<map>s. The C<:$label> takes an existing L<Label|/type/Label> to
-label the C<.map>'s loop with and C<:$item> controls whether the iteration will
-occur over C<(SELF,)> (if C<:$item> is set) or C<SELF>.
-
-In C<sub> form, will apply the C<code> block to the C<values>, which will be
-used as invocant.
-
-The form with C<\c>, C<Iterable:D \iterable> and C<Hash:D \hash> as signatures
-will fail with C<X::Cannot::Map>, and are mainly meant to catch common traps.
-
-=head2 method deepmap
-
-Defined as:
-
-    method deepmap(&block --> List) is nodal
-
-C<deepmap> will apply C<&block> to each element and return a new L<List|/type/List> with
-the return values of C<&block>, unless the element does the L<Iterable|/type/Iterable> role.
-For those elements L<deepmap|/routine/deepmap> will descend recursively into the sublist.
-
-    say [[1,2,3],[[4,5],6,7]].deepmap(* + 1);
-    # OUTPUT: «[[2 3 4] [[5 6] 7 8]]␤»
-
-=head2 method duckmap
-
-Defined as:
-
-    method duckmap(&block) is rw is nodal
-
-C<duckmap> will apply C<&block> on each element that behaves in such a way that
-C<&block> can be applied. If it fails, it will descend recursively if possible,
-or otherwise return the item without any transformation.
-
-    <a b c d e f g>.duckmap(-> $_ where <c d e>.any { .uc }).say;
-    # OUTPUT: «(a b C D E f g)␤»
-    (('d', 'e'), 'f').duckmap(-> $_ where <e f>.any { .uc }).say;
-    # OUTPUT: «((d E) F)␤»
-
-In the first case, it is applied to C<c>, C<d> and C<e> which are the ones that
-meet the conditions for the block (C<{ .uc }>) to be applied; the rest are
-returned as is.
-
-In the second case, the first item is a list that does not meet the condition,
-so it's visited; that flat list will behave in the same way as the first one. In
-this case:
-
-    say [[1,2,3],[[4,5],6,7]].duckmap( *² ); # OUTPUT: «[9 9]␤»
-
-You can square anything as long as it behaves like a number. In this case, there
-are two arrays with 3 elements each; these arrays will be converted into the
-number 3 and squared. In the next case, however
-
-    say [[1,2,3],[[4,5],6.1,7.2]].duckmap( -> Rat $_ { $_²} );
-    # OUTPUT: «[[1 2 3] [[4 5] 37.21 51.84]]␤»
-
-3-item lists are not C<Rat>, so it descends recursively, but eventually only applies the operation to those that walk (or slither, as the case may be) like a C<Rat>.
-
-Although on the surface (and name), C<duckmap> might look similar to L<C<deepmap>|/routine/deepmap>, the latter is applied recursively regardless of the type of the item.
-
-=head2 method nodemap
-
-Defined as:
-
-    method nodemap(&block --> List) is nodal
-
-C<nodemap> will apply C<&block> to each element and return a new L<List|/type/List> with
-the return values of C<&block>. In contrast to L<deepmap|/routine/deepmap> it will B<not> descend
-recursively into sublists if it finds elements which L<does|/routine/does> the L<Iterable|/type/Iterable> role.
-
-    say [[1,2,3], [[4,5],6,7], 7].nodemap(*+1);
-    # OUTPUT: «(4, 4, 8)␤»
-
-    say [[2, 3], [4, [5, 6]]]».nodemap(*+1)
-    # OUTPUT: «((3 4) (5 3))␤»
-
-The examples above would have produced the exact same results if we had used
-L<map|/routine/map> instead of C<nodemap>. The difference between the two lies in the
-fact that L<map|/routine/map> flattens out L<slips|/type/Slip> while C<nodemap> doesn't.
-
-    say [[2,3], [[4,5],6,7], 7].nodemap({.elems == 1 ?? $_ !! slip});
-    # OUTPUT: «(() () 7)␤»
-    say [[2,3], [[4,5],6,7], 7].map({.elems == 1 ?? $_ !! slip});
-    # OUTPUT: «(7)␤»
-
-=head2 method flat
-
-Defined as:
-
-    method flat() is nodal
-
-Interprets the invocant as a list, flattens
-L<non-containerized|/language/containers> L<Iterable|/type/Iterable>s into a
-flat list, and returns that list. Keep in mind L<Map|/type/Map> and
-L<Hash|/type/Hash> types are L<Iterable|/type/Iterable> and so will be flattened
-into lists of pairs.
-
-    say ((1, 2), (3), %(:42a));      # OUTPUT: «((1 2) 3 {a => 42})␤»
-    say ((1, 2), (3), %(:42a)).flat; # OUTPUT: «(1 2 3 a => 42)␤»
-
-Note that L<Arrays|/type/Array> containerize their elements by default, and so
-C<flat> will not flatten them. You can use
-L<hyper method call|/language/operators#index-entry-postfix_».> to call
-L«C<.List>|/routine/List» method on all the inner L<Iterables|/type/Iterable>
-and so de-containerize them, so that C<flat> can flatten them:
-
-    say [[1, 2, 3], [(4, 5), 6, 7]]      .flat; # OUTPUT: «([1 2 3] [(4 5) 6 7])␤»
-    say [[1, 2, 3], [(4, 5), 6, 7]]».List.flat; # OUTPUT: «(1 2 3 4 5 6 7)␤»
-
-For more fine-tuned options, see L<deepmap|/routine/deepmap>,
-L<duckmap|/routine/duckmap>, and
-L<signature destructuring|/type/Signature#Destructuring_Parameters>
+    multi sub    mro(*@list  --> Seq:D)
 
 =end pod
 
