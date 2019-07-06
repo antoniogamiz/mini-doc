@@ -103,6 +103,14 @@ The next list shows all characteristics that pod files in `test-doc` should have
   - [x] Routines
   - [x] Programs
 
+### Composing Types
+
+Routines from other types are added to complete the pods:
+
+- [x] Routines by role
+- [x] Routines by class
+- [x] Routines by a role done by a parent class
+
 # LICENSE
 
 The code in this repository is available under the Artistic License 2.0
