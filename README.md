@@ -5,35 +5,6 @@
 This is only a modified subset of the actual [documentation](https://github.com/perl6/doc).
 The main purpose of this repo is to be used to test changes in a fast way.
 
-### How to use this repo
-
-First you need to setup the test-doc enviroment:
-
-```
-make setup
-```
-
-Now you can either run a local server to the docs:
-
-```
-make run
-```
-
-Or you can make changes to the build system in `./doc` and execute
-
-```
-make build
-```
-
-to rebuild the doc and see if some files have been lost (this is done automatically
-with [Perl6::LinkHelath](https://github.com/antoniogamiz/Perl6-LinkHealth)).
-
-If you have made changes to the `test-doc` dir and you do not want to resetup the enviroment, you can execute:
-
-```
-make update-test-doc
-```
-
 #### Notes
 
 If you have changed some of the Pod6 files you need to update the `previous-links.txt` file
