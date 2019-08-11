@@ -1,6 +1,6 @@
-=begin pod :kind("Type") :subkind("class") :category("basic")
+=begin pod :kind("language") :subkind("class") :category("basic")
 
-=TITLE Independent routines
+=TITLE independent-routines
 
 =SUBTITLE Routines not defined within any class or role.
 
